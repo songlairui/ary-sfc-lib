@@ -7,9 +7,11 @@ import graphql from "rollup-plugin-graphql-tag";
 import commonjs from "rollup-plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 import minimist from "minimist";
-// import auto from "@rollup/plugin-auto-install";
 import resolve from "@rollup/plugin-node-resolve";
+// import auto from "@rollup/plugin-auto-install";
 // import multi from "@rollup/plugin-multi-entry";
+// import inject from "@rollup/plugin-inject";
+// import html from "@rollup/plugin-html";
 
 const argv = minimist(process.argv.slice(2));
 
@@ -19,6 +21,7 @@ const baseConfig = {
   input: "src/entry.js",
   plugins: {
     preVue: [
+      // html(),
       // multi(),
       // auto(),
       resolve(),
@@ -51,14 +54,8 @@ const baseConfig = {
 const external = [
   // list external dependencies, exactly the way it is written in the import statement.
   // eg. 'jquery'
+  "https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.min.js"
 ];
-
-// UMD/IIFE shared settings: output.globals
-// Refer to https://rollupjs.org/guide/en#output-globals for details
-const globals = {
-  // Provide global variable names to replace your external imports
-  // eg. jquery: '$'
-};
 
 // Customize configs for individual targets
 const buildFormats = [];
@@ -67,7 +64,7 @@ if (!argv.format || argv.format === "es") {
     ...baseConfig,
     external,
     output: {
-      dir: "dist",
+      dir: "serv/dist",
       // file: "dist/login.esm.js",
       format: "esm",
       exports: "named"

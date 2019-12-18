@@ -95,6 +95,20 @@
     rollup-pluginutils "^2.6.0"
     typescript "^3.4.3"
 
+"@rollup/plugin-html@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-html/-/plugin-html-0.1.0.tgz#2f2561e9fa920279386fa996d0d2fe1c64c4a6d3"
+  integrity sha512-IGxKYGqEAW72guZ1KE/JChx9KI4aX2OKT9OxRJjZX0QIyA4a6OcR0ir4GSauXvkrIOR2GjrHwYN2uSNE22lArw==
+
+"@rollup/plugin-inject@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-inject/-/plugin-inject-4.0.0.tgz#5c77f7ad366b6894b3712770848fcf91937b0473"
+  integrity sha512-qWBNZgTxnbE3aFstAd3xMXk5QlkTI3eEnXCQ2kgtbGBy3iz9Xz5OP27skm2HUFVqdORrn57dDe/VU3AWfv43Qw==
+  dependencies:
+    estree-walker "^0.9.0"
+    magic-string "^0.25.2"
+    rollup-pluginutils "^2.6.0"
+
 "@rollup/plugin-multi-entry@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-multi-entry/-/plugin-multi-entry-3.0.0.tgz#3ad496146f4c792cc07d647cdcb407f74831c293"
@@ -2554,6 +2568,11 @@ estree-walker@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-0.6.1.tgz#53049143f40c6eb918b23671d1fe3219f3a1b362"
   integrity sha512-SqmZANLWS0mnatqbSfRP5g8OXZC12Fgg1IwNtLsyHDzJizORW4khDfjPqJZsemPWBB2uqykUah5YpQ6epsqC/w==
+
+estree-walker@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-0.9.0.tgz#9116372f09c02fd88fcafb0c04343631012a0aa6"
+  integrity sha512-12U47o7XHUX329+x3FzNVjCx3SHEzMF0nkDv7r/HnBzX/xNTKxajBk6gyygaxrAFtLj39219oMfbtxv4KpaOiA==
 
 esutils@^2.0.2:
   version "2.0.3"

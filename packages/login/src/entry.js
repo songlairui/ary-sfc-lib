@@ -1,36 +1,26 @@
-async function main() {
-  const [
-    { default: Vue },
-    { default: VueApollo },
-    { default: VueUi },
-    { default: apolloClient },
-    { default: Login }
-  ] = await Promise.all([
-    import("vue"),
-    import("vue-apollo"),
-    import("@vue/ui"),
-    import("@/lib/apollo-client"),
-    import("./sfc")
-  ]);
+import Vue from "vue";
+import VueApollo from "vue-apollo";
+import VueUi from "@vue/ui";
+import Login from "@/login.vue";
+import apolloClient from "@/lib/apollo-client";
 
-  Vue.use(Login);
+import "./split";
 
-  Vue.use(VueUi);
-  Vue.use(VueApollo);
+Vue.use(Login);
 
-  const apolloProvider = new VueApollo({
-    defaultClient: apolloClient
-  });
+Vue.use(VueUi);
+Vue.use(VueApollo);
 
-  // const app =
-  new Vue({
-    el: "#app",
-    apolloProvider,
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient
+});
 
-    render(h) {
-      return h(Login);
-    }
-  });
-}
+// const app =
+new Vue({
+  el: "#app",
+  apolloProvider,
 
-main();
+  render(h) {
+    return h(Login);
+  }
+});
