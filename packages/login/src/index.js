@@ -4,6 +4,7 @@ import VueUi from "@vue/ui";
 import Login from "@/login.vue";
 import apolloClient from "@/lib/apollo-client";
 import "@vue/ui/dist/vue-ui.css";
+import "./index.css";
 
 Vue.use(Login);
 
@@ -18,8 +19,7 @@ const apolloProvider = new VueApollo({
 new Vue({
   el: "#app",
   apolloProvider,
-
   render(h) {
-    return h(Login);
+    return h("div", { class: "app" }, [h(Login)]);
   }
 });

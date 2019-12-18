@@ -9,9 +9,19 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@vue/ui@0.11.6/dist/vue-ui.css"
     />
+    <style lang="css">
+      .app {
+        min-height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app" class="app">
+      <Login />
+    </div>
     <script type="module">
       import "./dist/entry.js";
     </script>

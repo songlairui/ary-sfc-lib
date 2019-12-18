@@ -1,31 +1,50 @@
 
 <template>
   <div class="login">
-    <template v-if="!jwt">
-      <VueInput class="accent" v-model="identifier" placeholder="Username" />
-      <VueInput class="accent" v-model="password" placeholder="Password" type="password" />
+    <VueButton v-if="!jwt" @click="open = true">登 陆</VueButton>
+    <VueDropdown :label="`[${identifier}]`" button-class="accent" v-else>
+      <VueDropdownButton class="accent" @click="jwt = ''" icon-left="delete">登出</VueDropdownButton>
+      <VueDropdownButton class="accent" icon-left="lock" keep-open>Keep open</VueDropdownButton>
+    </VueDropdown>
+    <!-- <div class="row">
+      <VueSwitch v-model="locked" class="right">Locked</VueSwitch>
+    </div>-->
+    <VueModal v-if="open" title="Login" :locked="locked" class="small" @close="open = false">
+      <div class="default-body">
+        <VueFormField title="Username or email">
+          <VueInput class="accent" v-model="identifier" placeholder="Username" />
+        </VueFormField>
 
-      <button @click="login" class="primary" icon-left="flag">Login</button>
-      <VueLoadingIndicator v-if="loading" />
-    </template>
-    <template v-else>
-      <button @click="jwt = ''">Logout</button>
-    </template>
+        <VueFormField>
+          <VueInput class="accent" v-model="password" placeholder="Password" type="password" />
+          <span slot="subtitle">{{ !password ? ' ':'Password'}}</span>
+        </VueFormField>
+      </div>
+
+      <div slot="footer" class="actions">
+        <VueButton class="primary" @click="open = false">Close</VueButton>
+        <VueButton
+          class="primary"
+          icon-left="flag"
+          @click="login"
+          :loading-secondary="loading"
+        >Login</VueButton>
+      </div>
+    </VueModal>
   </div>
 </template>
 <script>
-import LOGIN from "./LOGIN.graphql";
-
-// console.info("LOGIN", LOGIN);
+import LOGIN from "./LOGIN.gql";
 
 // const LOGIN = {};
+// console.info("LOGIN", LOGIN);
 
 export default {
   name: "Login", // vue component name
   data() {
     return {
-      counter: 5,
-      initCounter: 5,
+      open: false,
+      locked: false,
       password: "",
       identifierRaw: localStorage.getItem("_USER_") || "",
       jwtRaw: localStorage.getItem("_AUTH_") || "",
@@ -75,9 +94,18 @@ export default {
           login: { jwt }
         } = data || {};
         this.jwt = jwt;
-      } catch (error) {}
+        this.open = false;
+      } catch (error) {
+        //
+      }
       this.loading = false;
     }
   }
 };
 </script>
+
+<style lang='css'>
+.row {
+  padding: 5px 0;
+}
+</style>
