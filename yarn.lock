@@ -3025,7 +3025,7 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"
   integrity sha512-a30VEBm4PEdx1dRB7MFK7BejejvCvBronbLjht+sHuGYj8PHs7M/5Z+rt5lw551vZ7yfTCj4Vuyy3mSJytDWRQ==
 
-graphql-tag@^2.10.1:
+graphql-tag@^2.10.1, graphql-tag@^2.2.2:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.10.1.tgz#10aa41f1cd8fae5373eaf11f1f67260a3cad5e02"
   integrity sha512-jApXqWBzNXQ8jYa/HLkZJaVw9jgwNqZkywa2zfFn16Iv1Zb7ELNHkJaXHR7Quvd5SIGsy6Ny7SUKATgnu05uEg==
@@ -6052,6 +6052,22 @@ rollup-plugin-commonjs@^10.1.0:
     resolve "^1.11.0"
     rollup-pluginutils "^2.8.1"
 
+rollup-plugin-graphql-tag@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-graphql-tag/-/rollup-plugin-graphql-tag-0.1.0.tgz#316bab90d65954889429eb7656533ba804eb7142"
+  integrity sha512-ZmhP1PNDInKl7OIT+1J7wweHEvK4MTz8q3YnIUZLm0FxY9XGNGOaRcv4OQsJ+gOuzgUMGEOiAol8YY3avF56hg==
+  dependencies:
+    graphql-tag "^2.10.1"
+    rollup-pluginutils "^2.8.2"
+
+rollup-plugin-graphql@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-graphql/-/rollup-plugin-graphql-0.1.0.tgz#cee3d7137133534f570826c00978eafe528069a9"
+  integrity sha512-zEAXAylBAkA489xk/KAzxtwQ5BcpcgEejsAbQ4gO19nZ8iin6+0TSogYfBhMSfZXtI4YXy3NEqwlT5E0E7rh2w==
+  dependencies:
+    graphql-tag "^2.2.2"
+    rollup-pluginutils "^2.0.1"
+
 rollup-plugin-terser@^5.1.2:
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/rollup-plugin-terser/-/rollup-plugin-terser-5.1.3.tgz#5f4c4603b12b4f8d093f4b6f31c9aa5eba98a223"
@@ -6078,7 +6094,7 @@ rollup-plugin-vue@5.1.1:
     source-map "0.7.3"
     vue-runtime-helpers "^1.1.1"
 
-rollup-pluginutils@^2.4.1, rollup-pluginutils@^2.6.0, rollup-pluginutils@^2.8.1:
+rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.4.1, rollup-pluginutils@^2.6.0, rollup-pluginutils@^2.8.1, rollup-pluginutils@^2.8.2:
   version "2.8.2"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.8.2.tgz#72f2af0748b592364dbd3389e600e5a9444a351e"
   integrity sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==

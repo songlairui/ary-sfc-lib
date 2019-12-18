@@ -1,42 +1,44 @@
 // rollup.config.js
-import path from 'path';
-import vue from 'rollup-plugin-vue';
-import alias from '@rollup/plugin-alias';
-import buble from '@rollup/plugin-buble';
-import commonjs from 'rollup-plugin-commonjs';
-import replace from '@rollup/plugin-replace';
-import { terser } from 'rollup-plugin-terser';
-import minimist from 'minimist';
+import path from "path";
+import vue from "rollup-plugin-vue";
+import alias from "@rollup/plugin-alias";
+import buble from "@rollup/plugin-buble";
+import graphql from "rollup-plugin-graphql-tag";
+import commonjs from "rollup-plugin-commonjs";
+import replace from "@rollup/plugin-replace";
+import { terser } from "rollup-plugin-terser";
+import minimist from "minimist";
 
 const argv = minimist(process.argv.slice(2));
 
-const projectRoot = path.resolve(__dirname, '..');
+const projectRoot = path.resolve(__dirname, "..");
 
 const baseConfig = {
-  input: 'src/entry.js',
+  input: "src/entry.js",
   plugins: {
     preVue: [
       replace({
-        'process.env.NODE_ENV': JSON.stringify('production'),
+        "process.env.NODE_ENV": JSON.stringify("production")
       }),
       commonjs(),
+      graphql(),
       alias({
-        resolve: ['.jsx', '.js', '.vue'],
+        resolve: [".jsx", ".js", ".vue"],
         entries: {
-          '@': path.resolve(projectRoot, 'src'),
-        },
-      }),
+          "@": path.resolve(projectRoot, "src")
+        }
+      })
     ],
     vue: {
       css: true,
       template: {
-        isProduction: true,
-      },
+        isProduction: true
+      }
     },
     postVue: [
-      buble(),
-    ],
-  },
+      buble({ transforms: { asyncAwait: false, templateString: false } })
+    ]
+  }
 };
 
 // ESM/UMD/IIFE shared settings: externals
@@ -55,35 +57,35 @@ const globals = {
 
 // Customize configs for individual targets
 const buildFormats = [];
-if (!argv.format || argv.format === 'es') {
+if (!argv.format || argv.format === "es") {
   const esConfig = {
     ...baseConfig,
     external,
     output: {
-      file: 'dist/login.esm.js',
-      format: 'esm',
-      exports: 'named',
+      file: "dist/login.esm.js",
+      format: "esm",
+      exports: "named"
     },
     plugins: [
       ...baseConfig.plugins.preVue,
       vue(baseConfig.plugins.vue),
-      ...baseConfig.plugins.postVue,
-    ],
+      ...baseConfig.plugins.postVue
+    ]
   };
   buildFormats.push(esConfig);
 }
 
-if (!argv.format || argv.format === 'cjs') {
+if (!argv.format || argv.format === "cjs") {
   const umdConfig = {
     ...baseConfig,
     external,
     output: {
       compact: true,
-      file: 'dist/login.ssr.js',
-      format: 'cjs',
-      name: 'Login',
-      exports: 'named',
-      globals,
+      file: "dist/login.ssr.js",
+      format: "cjs",
+      name: "Login",
+      exports: "named",
+      globals
     },
     plugins: [
       ...baseConfig.plugins.preVue,
@@ -91,26 +93,26 @@ if (!argv.format || argv.format === 'cjs') {
         ...baseConfig.plugins.vue,
         template: {
           ...baseConfig.plugins.vue.template,
-          optimizeSSR: true,
-        },
+          optimizeSSR: true
+        }
       }),
-      ...baseConfig.plugins.postVue,
-    ],
+      ...baseConfig.plugins.postVue
+    ]
   };
   buildFormats.push(umdConfig);
 }
 
-if (!argv.format || argv.format === 'iife') {
+if (!argv.format || argv.format === "iife") {
   const unpkgConfig = {
     ...baseConfig,
     external,
     output: {
       compact: true,
-      file: 'dist/login.min.js',
-      format: 'iife',
-      name: 'Login',
-      exports: 'named',
-      globals,
+      file: "dist/login.min.js",
+      format: "iife",
+      name: "Login",
+      exports: "named",
+      globals
     },
     plugins: [
       ...baseConfig.plugins.preVue,
@@ -118,10 +120,10 @@ if (!argv.format || argv.format === 'iife') {
       ...baseConfig.plugins.postVue,
       terser({
         output: {
-          ecma: 5,
-        },
-      }),
-    ],
+          ecma: 5
+        }
+      })
+    ]
   };
   buildFormats.push(unpkgConfig);
 }

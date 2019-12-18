@@ -14,7 +14,11 @@
   </div>
 </template>
 <script>
-import gql from "graphql-tag";
+import LOGIN from "./LOGIN.graphql";
+
+// console.info("LOGIN", LOGIN);
+
+// const LOGIN = {};
 
 export default {
   name: "Login", // vue component name
@@ -60,13 +64,7 @@ export default {
       try {
         const { data } = await this.$apollo.mutate({
           // Query
-          mutation: gql`
-            mutation Login($identifier: String!, $password: String!) {
-              login(input: { identifier: $identifier, password: $password }) {
-                jwt
-              }
-            }
-          `,
+          mutation: LOGIN,
           // Parameters
           variables: {
             identifier: this.identifier,

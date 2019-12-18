@@ -5,17 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Demo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@vue/ui@0.11.6/dist/vue-ui.css"
+    />
   </head>
   <body>
-    <div id="app">
-      <Login />
-    </div>
+    <div id="app"></div>
     <script type="module">
-      import Vue from "https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.esm.browser.js";
-      import Login from "../dist/login.esm.js";
+      import "./_.js";
+      import Vue from "./deps/vue.runtime.esm.js";
+      import VueUi from "./deps/vue-ui.esm.js";
+
+      import Login from "./deps/login.esm.js";
+
+      Vue.use(VueUi);
       Vue.use(Login);
       const app = new Vue({
-        el: "#app"
+        el: "#app",
+        render(h) {
+          return h(Login);
+        }
       });
     </script>
   </body>
