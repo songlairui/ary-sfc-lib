@@ -1,11 +1,36 @@
-import component from "@/login.vue";
+async function main() {
+  const [
+    { default: Vue },
+    { default: VueApollo },
+    { default: VueUi },
+    { default: apolloClient },
+    { default: Login }
+  ] = await Promise.all([
+    import("vue"),
+    import("vue-apollo"),
+    import("@vue/ui"),
+    import("@/lib/apollo-client"),
+    import("./sfc")
+  ]);
 
-function install(Vue) {
-  if (install.installed) return;
-  install.installed = true;
-  Vue.component("Login", component);
+  Vue.use(Login);
+
+  Vue.use(VueUi);
+  Vue.use(VueApollo);
+
+  const apolloProvider = new VueApollo({
+    defaultClient: apolloClient
+  });
+
+  // const app =
+  new Vue({
+    el: "#app",
+    apolloProvider,
+
+    render(h) {
+      return h(Login);
+    }
+  });
 }
 
-component.install = install;
-
-export default component;
+main();
