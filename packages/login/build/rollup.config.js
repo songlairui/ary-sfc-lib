@@ -101,7 +101,8 @@ const esConfig = {
     dir: "serv/dist",
     // file: "dist/login.esm.js",
     format: "esm",
-    exports: "named"
+    exports: "named",
+    chunkFileNames: "[name].js"
   },
   plugins: [
     ...baseConfig.plugins.preVue,

@@ -8,13 +8,20 @@ import Login from "./sfc";
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient
 });
+const defaultUse = () => {
+  Vue.use(Login);
+  Vue.use(VueUi);
+  Vue.use(VueApollo);
+};
 
-Vue.use(Login);
+const customLoad = (id = "#app", pre = defaultUse) => {
+  defaultUse();
+  return new Vue({
+    el: id,
+    apolloProvider
+  });
+};
 
-Vue.use(VueUi);
-Vue.use(VueApollo);
+export { VueApollo, apolloClient, VueUi, defaultUse, customLoad };
 
-new Vue({
-  el: "#app",
-  apolloProvider
-});
+export default customLoad;
