@@ -1,3 +1,3 @@
-import "./together";
-
 import("./split");
+
+export * from "./together";
